@@ -10,8 +10,13 @@ FileManager::FileManager(const string& booksFile, const string& usersFile)
     : booksFileName(booksFile), usersFileName(usersFile) {}
 
 // Save all library data
-bool FileManager::saveLibraryData(Library& library) {
-    return saveBooksToFile(library) && saveUsersToFile(library);
+bool FileManager::saveLibraryData(Library&library) {
+    if(booksFileName.empty() || usersFileName.empty()){
+        cout << "Avertissement : aucun repertoire de donnee specifie. Sauvegarde ignore \n";
+        return false;
+    }
+    else{  
+    return saveBooksToFile(library) && saveUsersToFile(library);}
 }
 
 // Load all library data
