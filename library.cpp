@@ -146,6 +146,19 @@ bool Library::returnBook(const string& isbn) {
     return false;
 }
 
+// Format book info with borrower name instead of ID
+string Library::formatBookInfo(const Book* book) {
+    if (book->getAvailability()) {
+        return book->toString();
+    }
+    User* user = findUserById(book->getBorrowerId());
+    string borrowerName = user ? user->getName() : book->getBorrowerId();
+    return "Titre : " + book->getTitle() +
+           "\nAuteur : " + book->getAuthor() +
+           "\nISBN : " + book->getISBN() +
+           "\nStatut : Emprunté par " + borrowerName;
+}
+
 // Display all books
 void Library::displayAllBooks() {
     if (books.empty()) {
@@ -156,7 +169,7 @@ void Library::displayAllBooks() {
     cout << "\n=== TOUS LES LIVRES ===\n";
     for (size_t i = 0; i < books.size(); ++i) {
         cout << "\nLivre " << (i + 1) << " :\n";
-        cout << books[i]->toString() << "\n";
+        cout << formatBookInfo(books[i].get()) << "\n";
         cout << "-------------------------\n";
     }
 }
