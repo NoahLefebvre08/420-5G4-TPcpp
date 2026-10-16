@@ -2,6 +2,8 @@
 #include <iostream>
 #include <filesystem>
 #include "filemanager.h"
+#include <ctime>
+#include <iomanip>
 
 using namespace std;
 
@@ -125,4 +127,19 @@ void FileManager::createBackup() {
     }
     
     cout << "Fichiers de sauvegarde créés.\n";
+}
+
+void FileManager::logActivity(const string& action, const string& details) {
+    ofstream logFile("activity.log", ios::app);
+    if (!logFile.is_open()) {
+        return;
+    }
+    
+    time_t now = time(nullptr);
+    tm* localTime = localtime(&now);
+
+    logFile << put_time(localTime, "%Y-%m-%d %H:%M:%S")
+            << " - [" << action << "] " << details << "\n";
+
+    logFile.close();
 }
