@@ -39,8 +39,8 @@ public:
     
     // Display methods
     string formatBookInfo(const Book* book);
-    void displayAllBooks();
-    void displayAvailableBooks();
+    void displayAllBooks(int sortOption = 0);
+    void displayAvailableBooks(int sortOption = 0);
     void displayAllUsers();
     
     // Statistics

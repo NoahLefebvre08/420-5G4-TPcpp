@@ -171,15 +171,25 @@ int main(int argc, char* argv[]) {
                 break;
             }
             
-            case 5: // Display All Books
-                library.displayAllBooks();
+            case 5: { // Display All Books
+                string sortStr = getInput("Trier par (1: Titre, 2: Auteur, 0: Aucun) : ");
+                int sortOpt = 0;
+                if (sortStr == "1") sortOpt = 1;
+                else if (sortStr == "2") sortOpt = 2;
+                library.displayAllBooks(sortOpt);
                 pauseForInput();
                 break;
+            }
             
-            case 6: // Display Available Books
-                library.displayAvailableBooks();
+            case 6: { // Display Available Books
+                string sortStr = getInput("Trier par (1: Titre, 2: Auteur, 0: Aucun) : ");
+                int sortOpt = 0;
+                if (sortStr == "1") sortOpt = 1;
+                else if (sortStr == "2") sortOpt = 2;
+                library.displayAvailableBooks(sortOpt);
                 pauseForInput();
                 break;
+            }
             
             case 7: { // Add User
                 string name = getInput("Entrez le nom de l'utilisateur : ");
